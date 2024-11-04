@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "SchoolAdminFrontend:build:production"
+              "buildTarget": "SchoolAdminFrontend:build:production"
             },
             "development": {
-              "browserTarget": "SchoolAdminFrontend:build:development"
+              "buildTarget": "SchoolAdminFrontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SchoolAdminFrontend:build"
+            "buildTarget": "SchoolAdminFrontend:build"
           }
         },
         "test": {
