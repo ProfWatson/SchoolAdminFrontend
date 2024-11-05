@@ -8,12 +8,11 @@ import { AppConfigService } from "./app-config.service";
     providedIn: 'root'
 })
 export class HttpService {
-    private readonly apiUrl: string = ''; // Set the base API URL
-
+    private readonly apiUrl: string = ''; 
     private readonly http = inject(HttpClient);
 
     constructor(private appConfig: AppConfigService) {
-        this.apiUrl = this.appConfig.apiUrl;  // Access the API URL
+      this.apiUrl = this.appConfig.apiUrl;
     }
 
     // Generic GET request

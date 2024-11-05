@@ -1,0 +1,41 @@
+.csa-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f5f2e6; /* Subtle brown color */
+    color: #5d5043; /* Darker brown text */
+    font-size: 0.9em;
+  }
+  
+  .csa-footer-section {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .csa-footer-section:first-child {
+    text-align: left;
+  }
+  
+  .csa-footer-section:last-child {
+    text-align: right;
+  }
+  
+  .csa-footer p {
+    margin: 0;
+  }
+  
+  .csa-social-icons a {
+    margin: 0 5px;
+    color: #5d5043;
+    font-size: 1.2em;
+    transition: color 0.3s;
+  }
+  
+  .csa-social-icons a:hover {
+    color: #8b6d5a; /* Slightly darker shade on hover */
+  }
+  
+  .csa-footer i {
+    font-size: 1.2em;
+  }

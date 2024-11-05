@@ -1,26 +1,23 @@
-import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { LoginResponse } from '../models/login-response.model';
+import { LoginResponse } from '../../shared/models/login-response.model';
 import { RoleService } from './role.service';
 import { TokenService } from './token.service';
+import { HttpService } from './http-client.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  private readonly http = inject(HttpClient);
-
-  constructor(private roleService: RoleService, private tokenService: TokenService) {}
+  constructor(private roleService: RoleService, private tokenService: TokenService, private httpService: HttpService) {}
 
   isAuthenticated(): Observable<boolean> {
     return this.tokenService.hasValidToken();
   }
 
   login(credentials: { username: string, password: string }): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('/api/login', credentials).pipe(
+    return this.httpService.post<LoginResponse>('/login', credentials).pipe(
       tap(response => {
         this.tokenService.setToken(response.token); // Assuming the token is in the response
         this.roleService.setRole(response.token); // Set roles from the decoded token
