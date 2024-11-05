@@ -1,0 +1,47 @@
+.csa-lock-icon {
+    position: relative;
+    top: -50px; /* Adjust as needed to overlap */
+    left: calc(50% - 40px); /* Center the icon */
+    width: 80px; /* Circle width */
+    height: 80px; /* Circle height */
+    background-color: #007bff; /* Blue background */
+    border-radius: 50%; /* Circular shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Icon color */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+    margin-bottom: -40px;
+    font-size: 40px; /* Adjust icon size as needed */
+  }
+
+  .csa-floating-label {
+    position: relative;
+    margin-bottom: 20px; /* Spacing between inputs */
+
+    input{
+        width: 100%;
+        padding: 10px 10px 10px 5px; /* Padding to the left to make space for the label */
+        border: 1px solid #ccc; /* Input border */
+        border-radius: 4px; /* Input border radius */
+        transition: border-color 0.2s ease; /* Border color transition */
+    }
+
+    label {
+        position: absolute;
+        left: 10px; /* Label position */
+        top: 10px; /* Label position */
+        color: #999; /* Default label color */
+        pointer-events: none; /* Prevent pointer events on the label */
+        transition: 0.2s ease all; /* Smooth transition */
+    }
+
+    /* Move the label when the input is focused or has a value */
+    input:focus ~ label,
+    input.has-value ~ label{
+        top: -20px; /* Move label up */
+        left: 10px; /* Keep label aligned */
+        color: #141313; /* Change label color on focus */
+        font-size: 12px; /* Smaller font size */
+    }
+  }

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-root', // This should match what you have in index.html
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'SchoolAdminFrontend';
+  // Your component logic
 }

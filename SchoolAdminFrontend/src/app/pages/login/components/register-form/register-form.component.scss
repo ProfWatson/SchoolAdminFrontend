@@ -1,0 +1,24 @@
+.csa-paper-icon {
+    position: relative;
+    top: -50px; /* Adjust as needed to overlap */
+    left: calc(50% - 40px); /* Center the icon */
+    width: 80px; /* Circle width */
+    height: 80px; /* Circle height */
+    background-color: #007bff; /* Blue background */
+    border-radius: 50%; /* Circular shape */
+    display: flex;
+    align-items: center;
+    color: white; /* Icon color */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+    margin-bottom: -40px;
+    font-size: 40px; /* Adjust icon size as needed */
+  }
+
+  .csa-paper-icon-center{
+    margin-left: 27px;
+  }
+
+  .csa-paper-icon:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }

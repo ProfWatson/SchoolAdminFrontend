@@ -1,0 +1,6 @@
+<div class="csa-login-background">
+</div>
+<div class="csa-center-box">
+  <app-login-form *ngIf="!showRegister" (toggle)="toggleView()"></app-login-form>
+  <app-register-form *ngIf="showRegister" (toggle)="toggleView()"></app-register-form>
+</div>
