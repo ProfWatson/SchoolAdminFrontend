@@ -24,9 +24,9 @@ export class RoleService {
     return roles ? JSON.parse(roles) : []; // Parse the JSON string or return an empty array if not found
   }
 
-  hasRole(expectedRole: string): boolean {
-    const roles: string[] = JSON.parse(localStorage.getItem('roles') || '[]'); // Get roles from localStorage
-    return roles.includes(expectedRole); // Check if the expected role is in the array of roles
+  hasRole(expectedRole: string[]): boolean {
+    const retrievedRoles: string[] = JSON.parse(localStorage.getItem('roles') || '[]');
+    return expectedRole.some(role => retrievedRoles.includes(role));
   }
 
   clearRole() {

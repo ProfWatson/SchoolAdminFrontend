@@ -1,1 +1,32 @@
-<p>navbar works!</p>
+<nav class="csa-navbar">
+    <!-- School Icon (Main Logo) -->
+    <div class="csa-logo" (click)="navigateTo('/home')">
+      <i class="fas fa-school csa-school-icon"></i>
+    </div>
+  
+    <!-- Navigation Links -->
+    <ul class="csa-nav-links">
+      <li (click)="navigateTo('/attendance')">
+        <i class="fas fa-calendar-check csa-nav-icon"></i>
+        <span>Attendance</span>
+      </li>
+      <li (click)="navigateTo('/class')">
+        <i class="fas fa-chalkboard-teacher csa-nav-icon"></i>
+        <span>Class</span>
+      </li>
+      <li (click)="navigateTo('/students')">
+        <i class="fas fa-user-graduate csa-nav-icon"></i>
+        <span>Students</span>
+      </li>
+      <li (click)="navigateTo('/teachers')">
+        <i class="fas fa-users csa-nav-icon"></i>
+        <span>Teachers</span>
+      </li>
+    </ul>
+
+    <!-- User Info and Logout -->
+  <div class="csa-user-info">
+    <span class="csa-user-name">{{ userName }}</span>
+    <i class="fas fa-door-open csa-logout-icon" (click)="logout()"></i>
+  </div>
+  </nav>

@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './core/http-interceptors/auth.interceptor';
 import { LoginModule } from './pages/login/login.module';
 import { AppComponent } from './app.component';
+import { NotificationComponent } from './shared/components/notification/notification.component';
 
 export function initializeApp(appConfig: AppConfigService) {
   return () => appConfig.loadConfig();
@@ -21,6 +22,7 @@ export function initializeApp(appConfig: AppConfigService) {
     BrowserModule,
     AppRoutingModule,
     LoginModule,
+    NotificationComponent
   ],
   providers: [
     provideAnimationsAsync(),

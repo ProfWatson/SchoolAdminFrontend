@@ -28,7 +28,7 @@ export class LoginFormComponent {
     this.authService.login(loginCredentials).subscribe(
       response => {
         // Handle successful login
-        this.router.navigate(['/']); // Redirect to landing page
+        this.router.navigate(['/landing']); // Redirect to landing page
       },
       error => {
         // Handle login error
