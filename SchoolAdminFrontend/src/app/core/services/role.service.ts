@@ -12,8 +12,9 @@ export class RoleService {
   constructor() { }
 
   setRole(token: string) {
-    const decodedToken = this.jwtHelper.decodeToken(token);
-    const roles = decodedToken.roles || []; // Extract roles from the decoded token
+    const decodedToken = this.jwtHelper.decodeToken(token);    
+    // Access the roles using the correct property name
+    const roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || []; 
     this.userRole.next(roles); // Set the roles in the BehaviorSubject
     localStorage.setItem('roles', JSON.stringify(roles)); // Store roles in localStorage
   }
