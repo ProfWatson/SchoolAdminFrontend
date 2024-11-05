@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   login(credentials: { username: string, password: string }): Observable<LoginResponse> {
-    return this.httpService.post<LoginResponse>('/login', credentials).pipe(
+    return this.httpService.post<LoginResponse>('Auth/login', credentials).pipe(
       tap(response => {
         this.tokenService.setToken(response.token); // Assuming the token is in the response
         this.roleService.setRole(response.token); // Set roles from the decoded token
