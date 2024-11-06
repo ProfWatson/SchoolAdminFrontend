@@ -32,9 +32,9 @@ export class DashboardService {
         widgetName: 'Notifications', 
         width: '300px', 
         height: '300px', 
-        widgetPosition: { top: 50, left: 50 }, 
-        originalPosition: { top: 50, left: 50 }, 
-        newPosition: { top: 50, left: 50 }, 
+        widgetPosition: { top: 60, left: 50 }, 
+        originalPosition: { top: 60, left: 50 }, 
+        newPosition: { top: 60, left: 50 }, 
         isVisible: true 
       },
       { 
@@ -42,9 +42,9 @@ export class DashboardService {
         widgetName: 'Classroom Schedule', 
         width: '800px', 
         height: '300px', 
-        widgetPosition: { top: 50, left: 360 }, 
-        originalPosition: { top: 50, left: 360},
-        newPosition: { top: 50, left: 360 }, 
+        widgetPosition: { top: 60, left: 360 }, 
+        originalPosition: { top: 60, left: 360},
+        newPosition: { top: 60, left: 360 }, 
         isVisible: true 
       },
       { 
@@ -52,9 +52,9 @@ export class DashboardService {
         widgetName: 'Calendar', 
         width: '300px', 
         height: '420px', 
-        widgetPosition: { top: 50, left: 1170 }, 
-        originalPosition: { top: 50, left: 1170 },
-        newPosition: { top: 50, left: 1170 }, 
+        widgetPosition: { top: 60, left: 1170 }, 
+        originalPosition: { top: 60, left: 1170 },
+        newPosition: { top: 60, left: 1170 }, 
         isVisible: true 
       },
       { 
@@ -62,9 +62,9 @@ export class DashboardService {
         widgetName: 'Grades Overview', 
         width: '300px', 
         height: '300px', 
-        widgetPosition: { top: 360, left: 50 }, 
-        originalPosition: { top: 360, left: 50 }, 
-        newPosition: { top: 360, left: 50 }, 
+        widgetPosition: { top: 370, left: 50 }, 
+        originalPosition: { top: 370, left: 50 }, 
+        newPosition: { top: 370, left: 50 }, 
         isVisible: true 
       },
       { 
@@ -72,9 +72,9 @@ export class DashboardService {
         widgetName: 'Recent Activity', 
         width: '300px', 
         height: '200px', 
-        widgetPosition: { top: 360, left: 360 }, 
-        originalPosition: { top: 360, left: 360 },
-        newPosition: { top: 360, left: 360 }, 
+        widgetPosition: { top: 370, left: 360 }, 
+        originalPosition: { top: 370, left: 360 },
+        newPosition: { top: 370, left: 360 }, 
         isVisible: true 
       },
       { 
@@ -82,9 +82,9 @@ export class DashboardService {
         widgetName: 'To-Do List', 
         width: '300px', 
         height: '200px', 
-        widgetPosition: { top: 360, left: 860 }, 
-        originalPosition: { top: 360, left: 860 },
-        newPosition: { top: 360, left: 860 }, 
+        widgetPosition: { top: 370, left: 860 }, 
+        originalPosition: { top: 370, left: 860 },
+        newPosition: { top: 370, left: 860 }, 
         isVisible: true 
       },
       { 
@@ -92,9 +92,9 @@ export class DashboardService {
         widgetName: 'Student Communication', 
         width: '300px', 
         height: '300px', 
-        widgetPosition: { top: 480, left: 1170 }, 
-        originalPosition: { top: 480, left: 1170 }, 
-        newPosition: { top: 480, left: 1170 }, 
+        widgetPosition: { top: 490, left: 1170 }, 
+        originalPosition: { top: 490, left: 1170 }, 
+        newPosition: { top: 490, left: 1170 }, 
         isVisible: true 
       },
     ];
@@ -137,6 +137,17 @@ export class DashboardService {
     const updatedWidgets = this.widgetStatesSubject.value.map(w => 
       w.id === id ? { ...w, isVisible: true } : w
     );
+    this.widgetStatesSubject.next(updatedWidgets);
+    this.saveLayout();
+  }
+
+  resetWidgets(): void {
+    const updatedWidgets = this.widgetStatesSubject.value.map(widget => ({
+      ...widget,
+      isVisible: true // Reset all widgets to be visible by default
+    }));
+  
+    // Update the widget state in the service and save the layout
     this.widgetStatesSubject.next(updatedWidgets);
     this.saveLayout();
   }

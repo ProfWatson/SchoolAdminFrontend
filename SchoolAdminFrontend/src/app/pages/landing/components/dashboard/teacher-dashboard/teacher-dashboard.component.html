@@ -1,12 +1,22 @@
 <div class="csa-teacher-dashboard-container">
-      <!-- Closed Widget Pills -->
-  <div class="closed-widget-pills" *ngFor="let widget of widgetStates" >
-    <span 
-      *ngIf="!widget.isVisible"
-      class="widget-pill" 
-      (click)="reopenWidget(widget.id)">
-        {{ widget.widgetName }}
-    </span>
+  <!-- Sidebar Drawer for Widgets -->
+  <div class="csa-drawer-container" [ngClass]="{ 'open': isDrawerOpen }">
+     <!-- Drawer Content -->
+    <div class="csa-drawer-content" [ngClass]="{ 'open': isDrawerOpen }">
+      <div class="csa-vertical-line"></div> <!-- Left Vertical Line -->
+      <div *ngFor="let widget of closedWidgets" class="csa-closed-widget-item">
+        <span (click)="reopenWidget(widget.id)" class="csa-reopen-widget-btn">{{ widget.widgetName }}</span>
+      </div>
+      <div *ngIf="closedWidgets.length > 0" class="csa-vertical-line"></div> <!-- Middle Vertical Line -->
+      <div class="csa-reset-widgets-btn" (click)="resetWidgets()">
+        <i class="fa fa-sync"></i>
+      </div>
+      <div class="csa-vertical-line"></div> <!-- Right Vertical Line -->
+    </div>
+    <!-- Chevron button (extrusion handle) -->
+    <div class="csa-drawer-toggle" (click)="toggleDrawer()">
+      <i class="fa" [ngClass]="{ 'fa-chevron-left': isDrawerOpen, 'fa-chevron-right': !isDrawerOpen }"></i>
+    </div>
   </div>
 
   <div class="widget-grid" *ngFor="let widget of widgetStates">
@@ -20,12 +30,33 @@
       (closed)="closeWidget(widget.id)">
             <!-- Dynamic Widget Content with ngTemplateOutlet -->
             <ng-container *ngIf="widget.widgetName === 'Notifications'">
-                <app-notification-widget></app-notification-widget>
-              </ng-container>
+              <app-notification-widget></app-notification-widget>
+            </ng-container>
         
-              <ng-container *ngIf="widget.widgetName === 'Classroom Schedule'">
-                <app-classroom-schedule-widget></app-classroom-schedule-widget>
-              </ng-container>
+            <ng-container *ngIf="widget.widgetName === 'Classroom Schedule'">
+              <app-classroom-schedule-widget></app-classroom-schedule-widget>
+            </ng-container>
+
+            <ng-container *ngIf="widget.widgetName === 'Calendar'">
+              <app-calendar-widget></app-calendar-widget>
+            </ng-container>
+
+            <ng-container *ngIf="widget.widgetName === 'Grades Overview'">
+              <app-grades-overview-widget></app-grades-overview-widget>
+            </ng-container>
+
+            <ng-container *ngIf="widget.widgetName === 'Recent Activity'">
+              <app-recent-activity-widget></app-recent-activity-widget>
+            </ng-container>
+
+            <ng-container *ngIf="widget.widgetName === 'To-Do List'">
+              <app-todo-list-widget></app-todo-list-widget>
+            </ng-container>
+
+            <ng-container *ngIf="widget.widgetName === 'Student Communication'">
+              <app-student-communication-widget></app-student-communication-widget>
+            </ng-container>
+
     </app-widget>
   </div>
 </div>

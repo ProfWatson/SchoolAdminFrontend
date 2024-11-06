@@ -1,25 +1,123 @@
 .csa-teacher-dashboard-container{
     position: relative;
 }
-
-.closed-widget-pills {
-  position: relative;
-  display: flex;
-  gap: 10px;
-  padding: 10px;
-  top: 0;
-}
-
-.widget-pill {
-  padding: 5px 10px;
-  background-color: #3D4D55;
-  color: white;
-  border-radius: 15px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #2b3c42;
+/* Container for the extrusion and chevron button */
+.csa-drawer-container {
+    z-index: 999;
+    height: 50px; /* Adjust height to match navbar */
+    width: 50px;
+    display: flex;
+    align-items: center;
+    transition: width 0.3s ease;
+    overflow: hidden;
   }
+
+/* Expanded drawer content area */
+.csa-drawer-container.open {
+    width: fit-content; /* Width when drawer is open */
+    transition: width 0.3s ease;
 }
+
+/* Drawer content styling */
+.csa-drawer-content {
+    height: 100%;
+    width: 0;
+    transition: width 0.6s ease;
+    background-color: #D3C3B9;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.csa-drawer-content.open {
+    width: fit-content;
+    transition: width 0.6s ease;
+    height: 100%;
+    background-color: #D3C3B9;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 0px 6px 6px 0px; 
+}
+  
+/* Chevron extrusion style (the handle) */
+.csa-drawer-toggle {
+  top: 10px; /* Adjust top to vertically center */
+  width: 16px; /* Width of the extrusion */
+  height: 30px; /* Height of the extrusion */
+  background-color: #D3C3B9; /* Same as navbar color */
+  border-radius: 0px 6px 6px 0px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: right 0.3s ease;
+}
+
+/* Chevron icon styling */
+.csa-drawer-toggle i {
+  color: #8a6d3b;; /* Chevron icon color matches navbar icons */
+  font-size: 18px;
+}
+
+/* Optional: Style the button when hovered */
+.csa-drawer-toggle:hover {
+  background-color: #3D4D55;; /* Darker shade on hover */
+}
+
+.csa-closed-widget-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    color: #3D4D55;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+/* Reopen widget button */
+.csa-reopen-widget-btn {
+    background-color: #8a6d3b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 4px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: #3D4D55;
+    }
+
+    &:active {
+        background-color: #1d292a;
+    }
+}
+
+/* Reset widgets button */
+.csa-reset-widgets-btn {
+    background-color: #8a6d3b;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: fit-content;
+    height: fit-content;
+    padding: 4px;
+
+    &:hover{
+        background-color: #3D4D55
+    }
+
+    &:active{
+        background-color: #1d292a;
+    }
+}
+
+.csa-vertical-line {
+    width: 1px; /* Thin line */
+    height: 40px; /* Adjust height based on your content */
+    background-color: #8a6d3b; /* Line color */
+    margin: 0 10px; /* Spacing around the line */
+  }
