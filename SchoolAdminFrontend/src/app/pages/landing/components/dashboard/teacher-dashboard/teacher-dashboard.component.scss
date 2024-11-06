@@ -1,0 +1,25 @@
+.csa-teacher-dashboard-container{
+    position: relative;
+}
+
+.closed-widget-pills {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  top: 0;
+}
+
+.widget-pill {
+  padding: 5px 10px;
+  background-color: #3D4D55;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #2b3c42;
+  }
+}

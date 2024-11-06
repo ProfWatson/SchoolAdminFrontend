@@ -1,0 +1,31 @@
+<div class="csa-teacher-dashboard-container">
+      <!-- Closed Widget Pills -->
+  <div class="closed-widget-pills" *ngFor="let widget of widgetStates" >
+    <span 
+      *ngIf="!widget.isVisible"
+      class="widget-pill" 
+      (click)="reopenWidget(widget.id)">
+        {{ widget.widgetName }}
+    </span>
+  </div>
+
+  <div class="widget-grid" *ngFor="let widget of widgetStates">
+    <app-widget
+      *ngIf="widget.isVisible"
+      [width]="widget.width"
+      [height]="widget.height"
+      [widgetPosition]="widget.widgetPosition"
+      [widgetName]="widget.widgetName"
+      [widget]="widget"
+      (closed)="closeWidget(widget.id)">
+            <!-- Dynamic Widget Content with ngTemplateOutlet -->
+            <ng-container *ngIf="widget.widgetName === 'Notifications'">
+                <app-notification-widget></app-notification-widget>
+              </ng-container>
+        
+              <ng-container *ngIf="widget.widgetName === 'Classroom Schedule'">
+                <app-classroom-schedule-widget></app-classroom-schedule-widget>
+              </ng-container>
+    </app-widget>
+  </div>
+</div>

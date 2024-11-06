@@ -1,26 +1,34 @@
 <nav class="csa-navbar">
     <!-- School Icon (Main Logo) -->
-    <div class="csa-logo" (click)="navigateTo('/home')">
+    <div class="csa-logo" (click)="navigateTo('dashboard')">
       <i class="fas fa-school csa-school-icon"></i>
     </div>
   
     <!-- Navigation Links -->
     <ul class="csa-nav-links">
-      <li (click)="navigateTo('/attendance')">
+      <li (click)="navigateTo('dashboard')">
+        <i class="fas fa-tachometer csa-nav-icon"></i> 
+        <span>Dashboard</span>
+      </li>
+      <li (click)="navigateTo('attendance')">
         <i class="fas fa-calendar-check csa-nav-icon"></i>
         <span>Attendance</span>
       </li>
-      <li (click)="navigateTo('/class')">
+      <li (click)="navigateTo('class')">
         <i class="fas fa-chalkboard-teacher csa-nav-icon"></i>
-        <span>Class</span>
+        <span>Classes</span>
       </li>
-      <li (click)="navigateTo('/students')">
+      <li (click)="navigateTo('students')">
         <i class="fas fa-user-graduate csa-nav-icon"></i>
         <span>Students</span>
       </li>
-      <li (click)="navigateTo('/teachers')">
+      <li (click)="navigateTo('teachers')">
         <i class="fas fa-users csa-nav-icon"></i>
         <span>Teachers</span>
+      </li>
+      <li (click)="navigateTo('subjects')">
+        <i class="fas fa-book-open csa-nav-icon"></i>
+        <span>Subjects</span>
       </li>
     </ul>
 

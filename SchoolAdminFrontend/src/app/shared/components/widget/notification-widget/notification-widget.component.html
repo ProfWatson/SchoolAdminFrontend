@@ -1,0 +1,35 @@
+<div class="csa-notification-widget">
+  <div class="csa-notification-header">
+    <i class="fa fa-bell"></i>
+    <span class="csa-notification-count">{{ notifications.length }}</span>
+  </div>
+
+  <div class="csa-notification-list">
+    <div
+      *ngFor="let notification of notifications; let i = index"
+      [ngClass]="{
+        'csa-notification-item': true,
+        'new': !notification.read, 
+        'read': notification.read,
+        'pinned': notification.pinned
+      }"
+      (click)="markAsRead(notification)">
+      <div class="csa-notification-content">
+        <p>{{ notification.message }}</p>
+        <span class="csa-timestamp">{{ notification.timestamp }}</span>
+      </div>
+      
+      <!-- Dismiss Button -->
+      <span
+        class="csa-dismiss-btn"
+        (click)="dismissNotification(i)">
+        &times;
+      </span>
+      
+      <!-- Pin Button -->
+      <span class="csa-pin-btn" (click)="togglePin(notification.id)">
+        <i class="fa" [ngClass]="{ 'fa-thumbtack': !notification.pinned, 'fa-pinned': notification.pinned }"></i>
+      </span>
+    </div>
+  </div>
+</div>

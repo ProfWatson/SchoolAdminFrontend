@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class NavbarComponent {
   userName: string = '';
+  activeItem: string = ''; // Track the active item
 
   constructor(private router: Router, private authService: AuthService) {
     // Assuming you store the username in local storage or retrieve it from a service
@@ -18,7 +19,8 @@ export class NavbarComponent {
   }
 
   navigateTo(route: string) {
-    this.router.navigate([route]);
+    this.activeItem = route;  // Set active item on click
+    this.router.navigate([`/landing/${route}`]);
   }
 
   logout() {

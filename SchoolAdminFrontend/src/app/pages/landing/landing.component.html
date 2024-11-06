@@ -1,1 +1,21 @@
-<p>landing works!</p>
+<div class="background-blur">
+  <!-- Background content that will be blurred -->
+</div>
+<div class="landing-container">
+  <!-- Sidebar for Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    
+    <div class="content-box">
+      <!-- The main content (not blurred) -->
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- Footer spanning the bottom -->
+     <div class="landing-footer">
+         <app-footer ></app-footer>
+     </div>
+  </div>
+</div>

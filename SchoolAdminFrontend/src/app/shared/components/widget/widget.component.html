@@ -1,0 +1,28 @@
+<div
+  class="widget-container"
+  cdkDrag
+  [cdkDragBoundary]="'.dashboard-container'"
+  (cdkDragEnded)="onDragEnd($event)"
+  [ngStyle]="{ 'height': height, 'width': width, 'top.px': widgetPosition.top, 'left.px': widgetPosition.left }"
+>
+  <div class="widget-header" cdkDragHandle>
+    <!-- Drag Icon -->
+    <div class="icon">
+      <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+        <path d="M0 0h24v24H0z" fill="none"></path>
+      </svg>
+    </div>
+    <!-- Widget Title -->
+    <div class="widget-title">{{ widgetName }}</div>
+    <!-- Close Button -->
+    <button class="icon close-btn" (click)="closeWidget()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Widget Content -->
+  <div class="widget-content">
+    <ng-content></ng-content>
+  </div>
+</div>

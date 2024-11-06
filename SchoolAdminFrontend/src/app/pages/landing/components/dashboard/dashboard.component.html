@@ -1,0 +1,6 @@
+<ng-container *ngIf="isStudent; else teacherDashboard">
+    <app-student-dashboard></app-student-dashboard>
+</ng-container>
+<ng-template #teacherDashboard>
+    <app-teacher-dashboard></app-teacher-dashboard>
+</ng-template>
