@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ScheduleEntry } from '../models/schedule-entry';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,18 +9,76 @@ export class ClassroomScheduleService {
 
   constructor() { }
 
-  scheduleData: any = {
-    // Sample data for each day and period with placeholders
-    'Monday': {
-      1: { subject: 'Assembly'},
-      2: { subject: 'LO Hall'},
-      3: { subject: 'ENG', gradeClass: '8 E', roomNumber: '103' }, // Only two fields
-      4: { subject: 'Geography', gradeClass: '8 E', roomNumber: '103'  }, // Only subject
-      5: { subject: 'Geography', gradeClass: '8 E', roomNumber: '103'  }, // Only room number
-      6: { subject: 'Geography', gradeClass: '8 E', roomNumber: '103'  }, // Only room number
-      7: { subject: 'Geography', gradeClass: '8 E', roomNumber: '103'  }, // Only room number
-      8: { subject: 'Geography', gradeClass: '8 E', roomNumber: '103'  }, // Only room number
+  scheduleData: ScheduleEntry[] = [
+    {
+      day: 'Day 1',
+      periods: [
+        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
+        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
+        { subject: 'History', roomNumber: '103' },
+        { subject: 'Geography' },
+        { roomNumber: '104' },
+        { subject: 'Physics', gradeClass: '12C' },
+        { subject: 'Chemistry' },
+        { subject: 'PE', roomNumber: 'Gym' }
+      ]
     },
-    // Add other days similarly
-  };
+    {
+      day: 'Day 2',
+      periods: [
+        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
+        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
+        { subject: 'History', roomNumber: '103' },
+        { subject: 'Geography' },
+        { roomNumber: '104' },
+        { subject: 'Physics', gradeClass: '12C' },
+        { subject: 'Chemistry' },
+        { subject: 'PE', roomNumber: 'Gym' }
+      ]
+    },
+    {
+      day: 'Day 3',
+      periods: [
+        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
+        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
+        { subject: 'History', roomNumber: '103' },
+        { subject: 'Geography' },
+        { roomNumber: '104' },
+        { subject: 'Physics', gradeClass: '12C' },
+        { subject: 'Chemistry' },
+        { subject: 'PE', roomNumber: 'Gym' }
+      ]
+    },
+    {
+      day: 'Day 4',
+      periods: [
+        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
+        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
+        { subject: 'History', roomNumber: '103' },
+        { subject: 'Geography' },
+        { roomNumber: '104' },
+        { subject: 'Physics', gradeClass: '12C' },
+        { subject: 'Chemistry' },
+        { subject: 'PE', roomNumber: 'Gym' }
+      ]
+    },
+    {
+      day: 'Day 5',
+      periods: [
+        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
+        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
+        { subject: 'History', roomNumber: '103' },
+        { subject: 'Geography' },
+        { roomNumber: '104' },
+        { subject: 'Physics', gradeClass: '12C' },
+        { subject: 'Chemistry' },
+        { subject: 'PE', roomNumber: 'Gym' }
+      ]
+    },
+  ];
+
+  // Method to get the schedule data
+  getScheduleData() {
+    return of(this.scheduleData);
+  }
 }
