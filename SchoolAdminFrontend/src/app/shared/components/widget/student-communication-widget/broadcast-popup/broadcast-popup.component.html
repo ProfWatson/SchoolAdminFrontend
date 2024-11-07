@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Create Broadcast</h2>
+<mat-dialog-content>
+    <div class="csa-form-dropdowns">
+        <mat-form-field [formGroup]="broadcastForm">
+          <mat-label>Select Grade</mat-label>
+          <mat-select [(value)]="selectedGrade" formControlName="grade">
+            @for (grade of grades; track grade) {
+              <mat-option [value]="grade">{{grade}}</mat-option>
+            }
+          </mat-select>
+          <mat-error *ngIf="broadcastForm.get('selectedGrade')?.hasError('required')">
+            Grade is required
+          </mat-error>
+        </mat-form-field>   
+    
+        <mat-form-field *ngIf="selectedGrade !== ''" [formGroup]="broadcastForm">
+          <mat-label>Select Subject</mat-label>
+          <mat-select [(value)]="selectedSubject"  formControlName="subject">
+            @for (subject of subjects; track subject) {
+              <mat-option [value]="subject">{{subject}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>       
+        <mat-form-field *ngIf="selectedSubject !== ''" [formGroup]="broadcastForm">
+          <mat-label>Select Class</mat-label>
+          <mat-select formControlName="className">
+            @for (class of classes; track class) {
+              <mat-option [value]="class">{{class}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>   
+    </div>
+
+    <!-- Broadcast Title Input -->
+    <mat-form-field appearance="fill" class="full-width" [formGroup]="broadcastForm">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Enter the title of the broadcast" formControlName="messageTitle">
+      <mat-error *ngIf="broadcastForm.get('broadcastTitle')?.hasError('required')">
+        Title is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Message Textarea -->
+    <mat-form-field appearance="fill" class="full-width" [formGroup]="broadcastForm">
+      <mat-label>Message</mat-label>
+      <textarea matInput placeholder="Enter the broadcast message" formControlName="message"></textarea>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="csa-button-gap">
+    <button mat-button class="csa-dialog-button csa-cancel-button" (click)="onNoClick()">
+        <i class="fa fa-cancel"></i> Cancel
+    </button>
+    <button mat-raised-button color="primary" class="csa-dialog-button csa-send-button" (click)="onSendBroadcast()" [disabled]="broadcastForm.invalid">
+        <i class="fa fa-envelope"></i> Send
+    </button>
+</mat-dialog-actions>

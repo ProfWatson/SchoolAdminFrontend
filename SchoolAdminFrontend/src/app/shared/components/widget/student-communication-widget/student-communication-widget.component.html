@@ -1,1 +1,31 @@
-<p>student-communication-widget works!</p>
+<div class="student-communication-widget">
+    <i class="fa fa-plus csa-icon" (click)="openBroadcastPopup()"></i>
+
+    <div class="broadcast-list">
+        <div *ngFor="let broadcast of broadcasts" class="broadcast-item" [ngStyle]="{'background-color': getBroadcastColor(broadcast)}" [ngClass]="{'flipped': broadcast.isFlipped}" (click)="toggleFlip(broadcast)">
+            <div [ngClass]="{'broadcast-front': !broadcast.isFlipped}">
+                <div class="broadcast-header">
+                  <!-- Radio tower icon -->
+                  <i class="fa fa-broadcast-tower"></i>
+                  <span class="broadcast-info" *ngIf="!broadcast.isFlipped">
+                    <!-- Broadcast grade, subject, or class -->
+                    <strong>{{ broadcast.messageTitle }}</strong>
+                  </span>
+                  <!-- Broadcast timestamp -->
+                  <span *ngIf="!broadcast.isFlipped" class="broadcast-date">{{ broadcast.dateSent| date: "MMM dd, yyyy" }}</span>
+                </div>
+                <div class="broadcast-message" *ngIf="!broadcast.isFlipped">
+                  <!-- Display the message content -->
+                  <p>{{ broadcast.grade }} {{ broadcast.subject }} {{ broadcast.className ? '(' + broadcast.className + ')' : '' }}</p>
+                </div>
+            </div>
+            <div class="broadcast-back" *ngIf="broadcast.isFlipped">
+                <div class="broadcast-message">
+                    <p>{{ broadcast.message }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back side (message) -->
+    </div>
+</div>

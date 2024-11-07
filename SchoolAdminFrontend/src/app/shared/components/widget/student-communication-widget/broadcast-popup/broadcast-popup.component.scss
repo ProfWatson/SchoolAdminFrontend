@@ -1,0 +1,53 @@
+/* Ensure full width on form fields */
+.full-width {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.csa-button-gap{
+    gap: 12px; 
+}
+
+.csa-dialog-button {
+  display: flex;
+  align-items: center; /* Centers the icon and text vertically */
+  border-radius: 50px;  /* Rounded buttons */
+  padding: 8px 16px; /* Adjust padding for a more balanced look */
+}
+
+.csa-cancel-button {
+  background-color: #f0f0f0;
+  color: #555;
+  border: 1px solid #e53935;
+}
+
+.csa-cancel-button i {
+  color: #e53935; /* Red color for cancel icon */
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.csa-send-button {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+}
+
+.csa-send-button i {
+  color: #fff; /* White color for send icon */
+  margin-right: 8px;
+}
+
+.mdc-text-field--filled {
+    background-color: transparent !important;
+}
+
+.csa-form-dropdowns {
+    display: flex;
+    flex-direction: column;
+}
+  
