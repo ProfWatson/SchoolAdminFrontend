@@ -51,7 +51,7 @@ export class DashboardService {
         id: 3, 
         widgetName: 'Calendar', 
         width: '300px', 
-        height: '420px', 
+        height: '380px', 
         widgetPosition: { top: 60, left: 1170 }, 
         originalPosition: { top: 60, left: 1170 },
         newPosition: { top: 60, left: 1170 }, 
@@ -59,7 +59,7 @@ export class DashboardService {
       },
       { 
         id: 4, 
-        widgetName: 'Grades Overview', 
+        widgetName: 'My Classes', 
         width: '300px', 
         height: '300px', 
         widgetPosition: { top: 370, left: 50 }, 
@@ -92,9 +92,9 @@ export class DashboardService {
         widgetName: 'Student Communication', 
         width: '300px', 
         height: '300px', 
-        widgetPosition: { top: 490, left: 1170 }, 
-        originalPosition: { top: 490, left: 1170 }, 
-        newPosition: { top: 490, left: 1170 }, 
+        widgetPosition: { top: 450, left: 1170 }, 
+        originalPosition: { top: 450, left: 1170 }, 
+        newPosition: { top: 450, left: 1170 }, 
         isVisible: true 
       },
     ];

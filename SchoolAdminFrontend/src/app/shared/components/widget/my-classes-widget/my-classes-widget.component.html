@@ -1,0 +1,13 @@
+<div class="csa-my-classes-widget">
+    <div class="csa-class-pills-container">
+      <ng-container *ngFor="let class of classes">
+        <button
+          class="csa-class-pill"
+          (click)="navigateToClass(class.id)"
+          mat-raised-button
+        >
+          {{ class.name }}
+        </button>
+      </ng-container>
+    </div>
+  </div>

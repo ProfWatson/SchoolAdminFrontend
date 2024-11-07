@@ -22,7 +22,7 @@ export function initializeApp(appConfig: AppConfigService) {
     BrowserModule,
     AppRoutingModule,
     LoginModule,
-    NotificationComponent
+    NotificationComponent,
   ],
   providers: [
     provideAnimationsAsync(),
