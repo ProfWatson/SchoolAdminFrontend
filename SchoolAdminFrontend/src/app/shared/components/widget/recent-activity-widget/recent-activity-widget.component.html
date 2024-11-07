@@ -1,1 +1,18 @@
-<p>recent-activity-widget works!</p>
+<div class="csa-recent-activities-widget">
+    <ul class="csa-activity-list">
+      <li *ngFor="let activity of recentActivities" (click)="navigateToActivity(activity.id)">
+        <div>
+            <div class="csa-activity-info">
+              <span class="csa-activity-subject">{{ activity.subject }}</span>
+              <span class="csa-activity-grade">{{ activity.grade }}, {{ activity.assignmentTitle }}</span>
+              <button class="csa-remove-button" (click)="removeActivity(activity.id); $event.stopPropagation()">
+                <i class="fa fa-trash-alt" aria-label="Remove activity"></i>
+              </button>
+            </div>
+            <div>
+                <span class="csa-activity-timestamp">{{ activity.timestamp | date: 'short' }}</span>
+            </div>
+        </div>
+      </li>
+    </ul>
+  </div>

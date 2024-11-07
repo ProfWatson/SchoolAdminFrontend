@@ -1,0 +1,59 @@
+.csa-recent-activities-widget {
+    width: inherit;
+    height: 340px;
+    border-radius: 5px;
+    overflow: auto;
+  }
+  
+  .csa-activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .csa-activity-list li {
+    cursor: pointer;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+  }
+  
+  .csa-activity-list li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .csa-activity-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .csa-activity-subject {
+    font-weight: bold;
+    color: #3f51b5;
+  }
+  
+  .csa-activity-grade, .csa-activity-timestamp {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .csa-remove-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.2s;
+  }
+  
+  .csa-remove-button:hover {
+    background-color: #d32f2f;
+  }
+
+  .csa-remove-button i {
+    color: white;
+    transition: color 0.2s;
+  }

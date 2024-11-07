@@ -59,9 +59,9 @@ export class DashboardService {
       },
       { 
         id: 4, 
-        widgetName: 'My Classes', 
+        widgetName: 'Recent Activity', 
         width: '300px', 
-        height: '300px', 
+        height: '400px', 
         widgetPosition: { top: 370, left: 50 }, 
         originalPosition: { top: 370, left: 50 }, 
         newPosition: { top: 370, left: 50 }, 
@@ -69,14 +69,15 @@ export class DashboardService {
       },
       { 
         id: 5, 
-        widgetName: 'Recent Activity', 
+        widgetName: 'My Classes', 
         width: '300px', 
         height: '200px', 
         widgetPosition: { top: 370, left: 360 }, 
         originalPosition: { top: 370, left: 360 },
-        newPosition: { top: 370, left: 360 }, 
+        newPosition: { top: 370, left: 360 },
         isVisible: true 
       },
+      
       { 
         id: 6, 
         widgetName: 'To-Do List', 
