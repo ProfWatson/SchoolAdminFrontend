@@ -1,0 +1,69 @@
+.csa-todo-widget {
+  width: inherit;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+.csa-todo-input-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.csa-todo-input {
+  width: 80%;
+  padding: 10px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+}
+
+.csa-todo-input:focus {
+  border: 1px solid #3f51b5;
+}
+
+.csa-todo-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.csa-todo-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.csa-todo-checkbox {
+  margin-right: 10px;
+}
+.csa-todo-text-row{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.csa-todo-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1em;
+  color: #333;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.csa-completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.csa-todo-item:active {
+  transform: translateY(2px);
+}
