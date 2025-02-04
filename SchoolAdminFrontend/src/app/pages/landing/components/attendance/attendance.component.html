@@ -4,12 +4,12 @@
     <!-- Class and Date Selection -->
     <div class="filters">
       <label for="class">Class:</label>
-      <select id="class"  (change)="loadStudents()">
+      <select id="class"  (change)="loadStudents()" [(ngModel)]="selectedClassId">
         <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
       </select>
   
       <label for="date">Date:</label>
-      <input id="date" type="date" >
+      <input id="date" type="date" [(ngModel)]="selectedDate">
     </div>
   
     <!-- Attendance Table -->
@@ -25,10 +25,10 @@
         <tr *ngFor="let student of students">
           <td>{{ student.firstName }}</td>
           <td>
-            <input type="radio" name="attendance-{{ student.id }}"  [value]="true">
+            <input type="radio" name="attendance-{{ student.id }}"  [value]="false" [(ngModel)]="attendanceRecords[student.id]">
           </td>
           <td>
-            <input type="radio" name="attendance-{{ student.id }}"  [value]="false">
+            <input type="radio" name="attendance-{{ student.id }}"  [value]="false" [(ngModel)]="attendanceRecords[student.id]">
           </td>
         </tr>
       </tbody>

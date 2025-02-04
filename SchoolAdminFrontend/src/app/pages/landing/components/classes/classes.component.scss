@@ -1,0 +1,51 @@
+
+.class-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+  
+    select {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  
+    button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+  
+      &:hover {
+        background-color: #ddd;
+      }
+  
+      &.active {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  .content {
+    flex-grow: 1;
+    background: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }

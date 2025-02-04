@@ -1,1 +1,55 @@
-<p>classes works!</p>
+<div class="class-selector">
+    <label for="classSelect">Select Class:</label>
+    <select id="classSelect" [(ngModel)]="selectedClass">
+      <option *ngFor="let classItem of classes" [value]="classItem.id">
+        {{ classItem.name }}
+      </option>
+    </select>
+  </div>
+  
+  <div class="tabs">
+    <button 
+      (click)="switchTab('planning')" 
+      [class.active]="activeTab() === 'planning'">
+      Annual Planning
+    </button>
+    <button 
+      (click)="switchTab('material')" 
+      [class.active]="activeTab() === 'material'">
+      Subject Material
+    </button>
+    <button 
+      (click)="switchTab('assignments')" 
+      [class.active]="activeTab() === 'assignments'">
+      Assignments
+    </button>
+  </div>
+  
+  <div class="content">
+    <!-- Annual Planning Tab -->
+    <div *ngIf="activeTab() === 'planning'">
+      <h2>Annual Planning</h2>
+      <p>Overview of the yearly plan for this class.</p>
+      <!-- Future: Add calendar or schedule display -->
+    </div>
+  
+    <!-- Subject Material Tab -->
+    <div *ngIf="activeTab() === 'material'">
+      <h2>Subject Material</h2>
+      <p>Resources, notes, and important files for this class.</p>
+      <!-- Future: Add file uploads or embedded PDFs -->
+    </div>
+  
+    <!-- Assignments Tab -->
+    <!-- <div *ngIf="activeTab() === 'assignments'">
+      <h2>Assignments</h2>
+      <button class="add-assignment" (click)="openAssignmentModal()">
+        ➕ Add Assignment
+      </button>
+      <ul>
+        <li *ngFor="let assignment of assignments">
+          {{ assignment.title }} - Due: {{ assignment.dueDate | date }}
+        </li>
+      </ul>
+    </div> -->
+  </div>

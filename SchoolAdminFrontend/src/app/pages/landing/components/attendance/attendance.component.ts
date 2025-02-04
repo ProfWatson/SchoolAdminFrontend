@@ -13,7 +13,7 @@ export class AttendanceComponent implements OnInit {
   students: Student[] = [];
   selectedClassId: number | null = null;
   selectedDate: string = new Date().toISOString().split('T')[0]; // Default to today
-  attendanceRecords: { [studentId: number]: boolean | null } = {};
+  attendanceRecords: { [studentId: string]: boolean | null } = {};
 
   constructor(private classService: ClassService, private myClassesService: MyClassesService) {}
 
@@ -28,6 +28,7 @@ export class AttendanceComponent implements OnInit {
     // });
     this.myClassesService.getClasses().subscribe(classes => {
       this.classes = classes;
+      this.selectedClassId = this.classes[0];
     });
   }
 
