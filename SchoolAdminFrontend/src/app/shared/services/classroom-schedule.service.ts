@@ -13,65 +13,65 @@ export class ClassroomScheduleService {
     {
       day: 'Day 1',
       periods: [
-        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
-        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
-        { subject: 'History', roomNumber: '103' },
-        { subject: 'Geography' },
-        { roomNumber: '104' },
+        { subject: 'Math', gradeClass: '10A'},
+        { subject: 'Science', gradeClass: '11B'},
+        { subject: 'History', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
         { subject: 'Physics', gradeClass: '12C' },
-        { subject: 'Chemistry' },
+        { subject: 'Chemistry',  gradeClass: '12C' },
         { subject: 'PE', roomNumber: 'Gym' }
       ]
     },
     {
       day: 'Day 2',
       periods: [
-        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
-        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
-        { subject: 'History', roomNumber: '103' },
-        { subject: 'Geography' },
-        { roomNumber: '104' },
+        { subject: 'Math', gradeClass: '10A'},
+        { subject: 'Science', gradeClass: '11B'},
+        { subject: 'History', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
         { subject: 'Physics', gradeClass: '12C' },
-        { subject: 'Chemistry' },
+        { subject: 'Chemistry',  gradeClass: '12C' },
         { subject: 'PE', roomNumber: 'Gym' }
       ]
     },
     {
       day: 'Day 3',
       periods: [
-        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
-        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
-        { subject: 'History', roomNumber: '103' },
-        { subject: 'Geography' },
-        { roomNumber: '104' },
+        { subject: 'Math', gradeClass: '10A'},
+        { subject: 'Science', gradeClass: '11B'},
+        { subject: 'History', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
         { subject: 'Physics', gradeClass: '12C' },
-        { subject: 'Chemistry' },
+        { subject: 'Chemistry',  gradeClass: '12C' },
         { subject: 'PE', roomNumber: 'Gym' }
       ]
     },
     {
       day: 'Day 4',
       periods: [
-        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
-        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
-        { subject: 'History', roomNumber: '103' },
-        { subject: 'Geography' },
-        { roomNumber: '104' },
+        { subject: 'Math', gradeClass: '10A'},
+        { subject: 'Science', gradeClass: '11B'},
+        { subject: 'History', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
         { subject: 'Physics', gradeClass: '12C' },
-        { subject: 'Chemistry' },
+        { subject: 'Chemistry',  gradeClass: '12C' },
         { subject: 'PE', roomNumber: 'Gym' }
       ]
     },
     {
       day: 'Day 5',
       periods: [
-        { subject: 'Math', gradeClass: '10A', roomNumber: '101' },
-        { subject: 'Science', gradeClass: '11B', roomNumber: '102' },
-        { subject: 'History', roomNumber: '103' },
-        { subject: 'Geography' },
-        { roomNumber: '104' },
+        { subject: 'Math', gradeClass: '10A'},
+        { subject: 'Science', gradeClass: '11B'},
+        { subject: 'History', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
+        { subject: 'Geography', gradeClass: '10E' },
         { subject: 'Physics', gradeClass: '12C' },
-        { subject: 'Chemistry' },
+        { subject: 'Chemistry',  gradeClass: '12C' },
         { subject: 'PE', roomNumber: 'Gym' }
       ]
     },

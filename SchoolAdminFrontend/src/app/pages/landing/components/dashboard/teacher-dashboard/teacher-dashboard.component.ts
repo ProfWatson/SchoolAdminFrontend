@@ -2,7 +2,6 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CalendarWidgetComponent } from 'src/app/shared/components/widget/calendar-widget/calendar-widget.component';
 import { ClassroomScheduleWidgetComponent } from 'src/app/shared/components/widget/classroom-schedule-widget/classroom-schedule-widget.component';
-import { GradesOverviewWidgetComponent } from 'src/app/shared/components/widget/grades-overview-widget/grades-overview-widget.component';
 import { MyClassesWidgetComponent } from 'src/app/shared/components/widget/my-classes-widget/my-classes-widget.component';
 import { NotificationWidgetComponent } from 'src/app/shared/components/widget/notification-widget/notification-widget.component';
 import { RecentActivityWidgetComponent } from 'src/app/shared/components/widget/recent-activity-widget/recent-activity-widget.component';

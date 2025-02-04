@@ -41,7 +41,7 @@ export class DashboardService {
         id: 2, 
         widgetName: 'Classroom Schedule', 
         width: '800px', 
-        height: '300px', 
+        height: '380px', 
         widgetPosition: { top: 60, left: 360 }, 
         originalPosition: { top: 60, left: 360},
         newPosition: { top: 60, left: 360 }, 
@@ -72,9 +72,9 @@ export class DashboardService {
         widgetName: 'My Classes', 
         width: '300px', 
         height: '200px', 
-        widgetPosition: { top: 370, left: 360 }, 
-        originalPosition: { top: 370, left: 360 },
-        newPosition: { top: 370, left: 360 },
+        widgetPosition: { top: 450, left: 360 }, 
+        originalPosition: { top: 450, left: 360 },
+        newPosition: { top: 450, left: 360 },
         isVisible: true 
       },
       
@@ -83,9 +83,9 @@ export class DashboardService {
         widgetName: 'To-Do List', 
         width: '300px', 
         height: '200px', 
-        widgetPosition: { top: 370, left: 860 }, 
-        originalPosition: { top: 370, left: 860 },
-        newPosition: { top: 370, left: 860 }, 
+        widgetPosition: { top: 450, left: 860 }, 
+        originalPosition: { top: 450, left: 860 },
+        newPosition: { top: 450, left: 860 }, 
         isVisible: true 
       },
       { 
