@@ -30,8 +30,13 @@ export class AnnualPlanningService {
     this.plans.push(item);
   }
 
+  updatePlanItem(item: PlanItem) {
+    const index = this.plans.findIndex(i => i.id === item.id);
+    this.plans[index] = item;
+    
+  }
+
   removePlanItem(itemId: number) {
     this.plans = this.plans.filter(p => p.id !== itemId);
   }
-
 }

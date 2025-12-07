@@ -29,6 +29,7 @@ export class AnnualPlanningComponent implements OnChanges, OnInit {
   today = new Date();
   showAddModal = false;
   allClasses: Class[] = [];
+  editingItem: PlanItem | null = null;
 
   filters = {
     planned: true,
@@ -126,12 +127,31 @@ export class AnnualPlanningComponent implements OnChanges, OnInit {
   }
 
   openCreateModal() {
+    this.editingItem = null;
+    this.showAddModal = true;
+  }
+
+  openEditModal(item: PlanItem, event: MouseEvent) {
+    event.stopPropagation(); // prevent row click
+    this.editingItem = item;
     this.showAddModal = true;
   }
 
   handleItemSaved(newItem: PlanItem) {
-    this.allItems.push(newItem);
-    this.applyFilters();
+    const index = this.allItems.findIndex(i => i.id === newItem.id);
+
+    if (index === -1) {
+      // ADD
+      this.allItems.push(newItem);
+      this.planningService.addPlanItem(newItem);
+    } else {
+      // EDIT
+      this.allItems[index] = newItem;
+      this.planningService.updatePlanItem(newItem);
+    }
+  
+    this.allItems = [...this.allItems]; // triggers Angular change detection
+    this.loadPlan();
   }
 
   handleCloseModal() {

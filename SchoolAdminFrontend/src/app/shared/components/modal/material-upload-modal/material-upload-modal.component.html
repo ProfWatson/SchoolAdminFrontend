@@ -6,46 +6,50 @@
   <form [formGroup]="form">
 
     <!-- Title -->
-    <label>Title</label>
+    <label>Title:
     <input type="text" formControlName="title" />
     <div class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
-      Title is required.
+      *Title is required.
     </div>
+    </label>
 
     <!-- Type -->
-    <label>Type</label>
+    <label>Type:
     <select formControlName="type">
       <option value="worksheet">Worksheet</option>
       <option value="notes">Notes</option>
       <option value="textbook">Textbook Section</option>
       <option value="resource">General Resource</option>
     </select>
+    </label>
 
     <!-- Planned Item Link -->
-    <label>Link to Lesson (Optional)</label>
+    <label>Link to Lesson: (Optional)
     <select formControlName="plannedItemId">
       <option value="">— None —</option>
       <option *ngFor="let p of plannedItems" [value]="p.relatedId">
         {{ p.title }}
       </option>
     </select>
+    </label>
 
     <!-- File Upload -->
-    <label>Select File</label>
+    <label>Select File:
     <input type="file" (change)="onFileSelected($event)" multiple="false"/>
 
     <div class="error" *ngIf="form.get('file')?.errors?.['required'] && form.get('file')?.touched">
-      A file is required.
+      *A file is required.
     </div>
 
     <div class="error" *ngIf="form.get('file')?.errors?.['multiple']">
-      Only one file may be uploaded.
+      *Only one file may be uploaded.
     </div>
+    </label>
 
     <!-- Buttons -->
     <div class="actions">
       <button type="button" class="cancel" (click)="close.emit()">Cancel</button>
-      <button type="button" class="upload" (click)="upload()" [disabled]="form.invalid">
+      <button type="submit" (click)="upload()">
         Upload
       </button>
     </div>

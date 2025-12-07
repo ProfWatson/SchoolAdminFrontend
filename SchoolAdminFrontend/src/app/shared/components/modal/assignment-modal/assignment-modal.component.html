@@ -1,0 +1,65 @@
+<div class="modal-backdrop" (click)="closeModal.emit()"></div>
+
+<div class="modal">
+  <h2>{{ assignment ? 'Edit Assignment' : 'Create Assignment' }}</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      
+        <!-- Name -->
+        <label class="form-label">Assignment Title
+        <input class="input" formControlName="name" placeholder="e.g. Fractions Test 1" />
+        <div class="error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+          *Name is required.
+        </div>
+        </label>
+      
+        <!-- Due Date -->
+        <label class="form-label">Due Date
+        <input class="input" type="date" formControlName="dueDate" />
+        <div class="error" *ngIf="form.get('dueDate')?.touched && form.get('dueDate')?.invalid">
+          *Due date is required.
+        </div>
+        </label>
+      
+        <!-- Sections -->
+        <div class="section-header">
+          <h3>Sections</h3>
+          <button type="button" class="add-btn" (click)="addSection()">➕ Add Section</button>
+        </div>
+      
+        <ng-container *ngFor="let sec of sectionsArray.controls; let i = index">
+          <div class="section-item" [formGroup]="sec">
+            <label class="form-label">
+            <input class="input small" formControlName="name" placeholder="Section name" />
+            <div class="error" *ngIf="sec.get('name')?.touched && sec.get('name')?.invalid">
+              *Section name required.
+            </div>
+            </label>
+      
+            <label class="form-label">
+            <input
+              class="input small"
+              type="number"
+              min="0"
+              formControlName="total"
+              (input)="updateTotal()"
+              placeholder="Marks"
+            />
+            <div class="error" *ngIf="sec.get('total')?.touched && sec.get('total')?.invalid">
+              *Marks must be greater than 0.
+            </div>
+            </label>
+      
+            <button class="delete-btn" (click)="removeSection(i)">🗑</button>
+          </div>
+        </ng-container>
+      
+        <div class="total-row">
+          Total Marks: <strong>{{ form.get('total')?.value }}</strong>
+        </div>
+      
+        <div class="actions">
+          <button class="cancel-btn" (click)="closeModal.emit()">Cancel</button>
+          <button type="submit" (click)="submit()">Save</button>
+        </div>
+    </form>
+</div>

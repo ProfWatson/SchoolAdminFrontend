@@ -1,1 +1,65 @@
-<p>assignments works!</p>
+<div class="assignments-container">
+  <div class="header">
+    <h2>Assignments</h2>
+
+    <button class="upload-btn" (click)="openCreateModal()">
+      ➕ Create Assignment
+    </button>
+  </div>
+  <div class="group" *ngFor="let a of assignments">
+    <h3 class="group-title">{{ a.name }}</h3>
+
+    <div class="assignment-card">
+
+      <div class="row">
+        <div class="row-item"><strong>Due:</strong> {{ a.dueDate }}</div>
+        <div class="row-item"><strong>Weight:</strong> {{ a.weight }}%</div>
+        <div class="row-item"><strong>Total:</strong> {{ a.total }}</div>
+      </div>
+
+      <div class="sections">
+        <strong>Sections:</strong>
+
+        <ul>
+          <li *ngFor="let s of a.sections">
+            {{ s.name }} ({{ s.total }})
+          </li>
+        </ul>
+      </div>
+
+      <div class="stats">
+        <strong>Stats:</strong>
+        <div class="stats-grid">
+          <div>Avg: 0%</div>
+          <div>Pass: 0%</div>
+          <div>Completed: 0%</div>
+          <div>Highest: 0%</div>
+          <div>Lowest: 0%</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="marks-btn" (click)="openMarks(a.id)">📊 Open Marks</button>
+        <button class="delete-btn" (click)="deleteAssignment(a.id)">🗑 Delete</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-assignment-modal
+  *ngIf="showCreateModal"
+  [assignment]="null"
+  [classId]="classId"
+  [gradeSubjectId]="gradeSubjectId"
+  (saveItem)="handleItemSaved($event)"
+  (closeModal)="closeCreateModal()"
+></app-assignment-modal>
+
+<app-student-marks-modal
+  *ngIf="showMarksModal"
+  [classId]="classId"
+  [gradeSubjectId]="gradeSubjectId"
+  [assignmentId]="selectedAssignmentId"
+  (closeModal)="closeMarksModal()"
+></app-student-marks-modal>

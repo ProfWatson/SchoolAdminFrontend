@@ -49,7 +49,8 @@
         <td [class.past]="isPast(item)">{{ getDuration(item.start, item.end) }}</td>
         <td>{{ item.type }}</td>
         <td class="actions">
-            <button class="delete-btn" (click)="deleteItem(item, $event)">🗑️</button>
+          <button class="delete-btn" (click)="deleteItem(item, $event)">🗑️</button>
+          <button class="delete-btn" (click)="openEditModal(item, $event)">Edit</button>
         </td>
       </tr>
     </tbody>
@@ -75,6 +76,8 @@
 <app-add-plan-item-modal
   *ngIf="showAddModal"
   [classes]="allClasses"
+  [currentClassId]="classId"
+  [editItem]="editingItem"
   [gradeSubjects]="gradeSubjects"
   (saveItem)="handleItemSaved($event)"
   (closeModal)="handleCloseModal()">

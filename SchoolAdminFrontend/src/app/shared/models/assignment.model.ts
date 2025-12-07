@@ -1,6 +1,12 @@
+import { AssignmentSection } from "./assignment-section.model";
+
 export interface Assignment {
-    id: string;
-    grade: string;
-    subject: string;
-    className: string;
-  }
+  id: number;
+  classId: number;          
+  gradeSubjectId: number;   
+  name: string;
+  weight: number;           
+  total: number;            
+  dueDate: string;
+  sections: AssignmentSection[];
+}

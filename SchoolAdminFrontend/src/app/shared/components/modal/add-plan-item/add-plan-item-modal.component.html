@@ -1,7 +1,7 @@
 <div class="modal-backdrop" (click)="close()"></div>
 
 <div class="modal-content">
-  <h3>Add Plan Item</h3>
+  <h2>Add Plan Item</h2>
 
   <form [formGroup]="form" (ngSubmit)="save()">
 
@@ -11,7 +11,7 @@
       <select formControlName="classId">
         <option [ngValue]="null">All Classes (Grade Subject)</option>
         <option *ngFor="let cls of classes" [ngValue]="cls.id">
-          {{ cls.name }} ({{ gradeSubjects[cls.gradeSubjectId]?.subjectCode }})
+          {{ cls.name }} ({{ gradeSubjects[cls.gradeSubjectId].subjectCode }})
         </option>
       </select>
     </label>
@@ -38,17 +38,27 @@
     <label>
       Start Date:
       <input type="date" formControlName="start" />
+      <div class="error" *ngIf="form.get('start')?.touched && form.get('start')?.invalid">
+        *Start date is required
+      </div>
     </label>
 
     <!-- End Date -->
     <label>
       End Date:
       <input type="date" formControlName="end" />
+      <div class="error" *ngIf="form.get('end')?.touched && form.get('end')?.invalid">
+        *End date is required
+      </div>
+      <div  *ngIf="form.errors?.startAfterEnd" class="error" >
+      *Start date must be before or equal to End date.
+      </div>
     </label>
+
 
     <div class="actions">
       <button type="button" class="cancel" (click)="close()">Cancel</button>
-      <button type="submit" [disabled]="form.invalid">Save</button>
+      <button type="submit">Save</button>
     </div>
   </form>
 </div>
