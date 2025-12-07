@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AssignmentService } from 'src/app/shared/services/assignment.service';
 import { AssignmentMark } from 'src/app/shared/models/assignment-mark.model';
 import { AssignmentSection } from 'src/app/shared/models/assignment-section.model';
@@ -32,6 +32,7 @@ export class StudentMarksModalComponent implements OnInit {
   students: Student[] = [];
   sections: AssignmentSection[] = [];
   loading = true;
+  assignmentTotal = 0; // assign this from the assignment object in ngOnInit
 
   getSectionMarks(student: FormGroup): FormArray {
     return student.get('sectionMarks') as FormArray;
@@ -44,24 +45,18 @@ export class StudentMarksModalComponent implements OnInit {
 
     this.loading = true;
 
-    // Fetch assignment
-    this.assignmentService.getAssignments(this.classId, this.gradeSubjectId).subscribe(assignments => {
-      console.log('a1', assignments);
-      console.log('a2', this.assignmentId);
-      
+    this.assignmentService.getAssignments(this.classId, this.gradeSubjectId).subscribe(assignments => {  
       
       const assignment = assignments.find(a => a.id === this.assignmentId);
-      console.log('a', assignment);
       
       if (!assignment) return;
 
+      this.assignmentTotal = assignment.total;
       this.sections = assignment.sections;
-      console.log('b',this.sections);
       
 
       // Fetch students (for now mocked)
       this.students = this.mockFetchStudents(this.classId!);
-      console.log('c',this.students);
       // Fetch existing marks
       this.assignmentService.getMarks(this.classId!, this.assignmentId!).subscribe(existingMarks => {
 
@@ -107,11 +102,17 @@ export class StudentMarksModalComponent implements OnInit {
       studentId: [mark.studentId],
       studentname: [mark.studentname],
       sectionMarks: this.fb.array(
-        mark.sectionMarks.map(sm =>
+        mark.sectionMarks.map((sm, index) =>
           this.fb.group({
             id: [sm.id],
             sectionId: [sm.sectionId],
-            mark: [sm.mark]
+            mark: [
+            sm.mark,
+            [
+              Validators.min(0),
+              Validators.max(this.sections[index].total) // <-- max validator
+            ]
+          ]
           })
         )
       ),
@@ -126,6 +127,17 @@ export class StudentMarksModalComponent implements OnInit {
 
     return group;
   }
+
+  clampValue(student: FormGroup, index: number) {
+  const sectionCtrl = (student.get('sectionMarks') as FormArray).at(index);
+  const max = this.sections[index].total;
+  const current = sectionCtrl.get('mark')?.value;
+  if (current > max) {
+    sectionCtrl.get('mark')?.setValue(max, { emitEvent: true });
+  } else if (current < 0) {
+    sectionCtrl.get('mark')?.setValue(0, { emitEvent: true });
+  }
+}
 
   save() {
     const formValue = this.marksForm.value.students;
@@ -154,5 +166,19 @@ export class StudentMarksModalComponent implements OnInit {
       { id: 2, name: 'Bob Smith' },
       { id: 3, name: 'Charlie Brown' }
     ];
+  }
+
+
+
+getPercent(total: number | undefined): number {
+  if (!total || this.assignmentTotal === 0) return 0;
+  return (total / this.assignmentTotal) * 100;
+}
+
+getPercentColor(total: number | undefined): string {  
+  if (!total) return '#ccc';
+  if (this.getPercent(total) >= 70) return '#4caf50'; // green
+  if (this.getPercent(total) >= 40) return '#ffc107'; // yellow
+  return '#f44336'; // red
   }
 }

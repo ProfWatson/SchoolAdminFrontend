@@ -11,13 +11,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   background: white;
-  width: 600px;
+  width: 700px;
   max-height: 90vh;
   padding: 22px;
   border-radius: 12px;
-
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -35,7 +33,7 @@
     border-collapse: collapse;
 
     th, td {
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       padding: 6px 8px;
       text-align: center;
     }
@@ -44,7 +42,14 @@
       width: 60px;
       padding: 4px 6px;
       border-radius: 4px;
-      border: 1px solid #ccc;
+      border: none;
+      text-align: center;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #b58863;
+      box-shadow: 0 0 2px #b58863;
     }
   }
 

@@ -9,7 +9,8 @@
         <tr>
           <th>Student</th>
           <th *ngFor="let sec of sections">{{ sec.name }} ({{ sec.total }})</th>
-          <th>Total</th>
+          <th>Total ({{assignmentTotal}})</th>
+          <th>%</th>
         </tr>
       </thead>
       <tbody formArrayName="students">
@@ -18,11 +19,26 @@
 
           <ng-container formArrayName="sectionMarks">
             <td *ngFor="let secCtrl of getSectionMarks(student).controls; let j = index" [formGroupName]="j">
-              <input type="number" formControlName="mark" min="0" [max]="sections[j].total" style="width:60px; text-align:center;">
+              <input 
+                type="number" 
+                formControlName="mark" 
+                min="0" 
+                [max]="sections[j].total" 
+                (input)="clampValue(student, j)"
+              >
             </td>
           </ng-container>
 
           <td>{{ student.get('total')?.value }}</td>
+
+          <td 
+            [ngStyle]="{
+              'background-color': getPercentColor(student.get('total')?.value),
+              'color': '#fff',
+              'font-weight': '600'
+            }">
+            {{ getPercent(student.get('total')?.value) | number:'1.0-1' }}%
+          </td>
         </tr>
       </tbody>
     </table>
