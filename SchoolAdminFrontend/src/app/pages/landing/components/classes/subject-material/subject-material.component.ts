@@ -59,10 +59,10 @@ export class SubjectMaterialComponent implements OnInit, OnChanges{
   ngOnChanges() {
     if (!this.classId || !this.gradeSubjectId) return;
 
-    this.planningService.getPlanForClass(this.classId, this.gradeSubjectId).subscribe((plans) => {
+    this.planningService.getPlanForClass(this.classId, this.gradeSubjectId).subscribe((plans) => {     
       this.plannedItems = plans;
 
-      this.materialService.getMaterialsForClass(this.classId!).subscribe((files) => {
+      this.materialService.getMaterials(this.classId, this.gradeSubjectId).subscribe((files) => {
         this.files = files;
         this.groupMaterial();
       });

@@ -11,6 +11,19 @@
           *Name is required.
         </div>
         </label>
+
+        <!-- Planned Item Link -->
+        <label>Link to Lesson: (Optional)
+        <select formControlName="plannedItemId">
+          <option value="">— None —</option>
+          <option *ngFor="let p of plannedItems" [value]="p.relatedId">
+            {{ p.title }}
+          </option>
+        </select>
+        <div class="error" *ngIf="form.get('plannedItemId')?.touched && form.get('plannedItemId')?.invalid">
+          *Planned item selection is required.
+        </div>
+        </label>
       
         <!-- Due Date -->
         <label class="form-label">Due Date

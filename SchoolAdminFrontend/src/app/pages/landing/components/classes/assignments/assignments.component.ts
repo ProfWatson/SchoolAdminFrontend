@@ -6,6 +6,7 @@ import { Assignment } from 'src/app/shared/models/assignment.model';
 import { PlanItem } from 'src/app/shared/models/plan-item.model';
 import { AssignmentService } from 'src/app/shared/services/assignment.service';
 import { StudentMarksModalComponent } from 'src/app/shared/components/modal/student-marks-modal/student-marks-modal.component';
+import { AnnualPlanningService } from 'src/app/shared/services/annual-planning.service';
 
 @Component({
   selector: 'app-assignments',
@@ -14,21 +15,29 @@ import { StudentMarksModalComponent } from 'src/app/shared/components/modal/stud
   templateUrl: './assignments.component.html',
   styleUrl: './assignments.component.scss'
 })
-export class AssignmentsComponent implements OnInit{
+export class AssignmentsComponent implements OnInit, OnChanges{
   @Input() classId!: number | null;
   @Input() gradeSubjectId!: number | null;
   @Input() assignments: Assignment[] = [];
   selectedAssignmentId: number | null = null
-
+  plannedItems: PlanItem[] = [];
   showCreateModal = false;
   showMarksModal = false;
 
-  constructor(private assignmentService: AssignmentService) {}
+  constructor(private planningService: AnnualPlanningService, private assignmentService: AssignmentService) {}
 
   ngOnInit() {
     if (this.classId && this.gradeSubjectId) {
       this.loadAssignments();
     }
+  }
+
+  ngOnChanges() {
+    if (!this.classId || !this.gradeSubjectId) return;
+
+    this.planningService.getPlanForClass(this.classId, this.gradeSubjectId).subscribe((plans) => {
+      this.plannedItems = plans;
+    });
   }
 
   loadAssignments() {

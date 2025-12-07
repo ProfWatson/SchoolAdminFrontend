@@ -14,9 +14,19 @@ export class AssignmentService {
   // Reactive subjects
   private assignments$ = new BehaviorSubject<Assignment[]>(this.assignments);
   private marks$ = new BehaviorSubject<AssignmentMark[]>(this.marks);
+  private _focusSubject = new BehaviorSubject<{ classId: number; id: number; type: string } | null>(null);
+  focus$ = this._focusSubject.asObservable();
 
   constructor() {
     this.mockInitialData();
+  }
+
+  existsAssignment(classId: number, relatedId: number): boolean {
+    return this.assignments.some(a => a.classId === classId || a.plannedItemId === relatedId);
+  }
+
+  focusOnAssignment(classId: number, relatedId: number) {
+    this._focusSubject.next({ classId, id: relatedId, type: 'material' });
   }
 
   getAssignments(classId: number, gradeSubjectId: number): Observable<Assignment[]> {
@@ -89,6 +99,7 @@ export class AssignmentService {
           { id: 1, name: 'Part A', total: 10 },
           { id: 2, name: 'Part B', total: 20 },
         ],
+        plannedItemId: 101
       },
       {
         id: 2,
@@ -102,6 +113,7 @@ export class AssignmentService {
           { id: 3, name: 'Part A', total: 20 },
           { id: 4, name: 'Part B', total: 30 },
         ],
+        plannedItemId: 102
       },
     ];
 

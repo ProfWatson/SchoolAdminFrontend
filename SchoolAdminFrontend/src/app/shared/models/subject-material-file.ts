@@ -3,9 +3,8 @@ export interface SubjectMaterialFile {
   title: string;
   fileUrl: string;
   uploadedAt: string;
-
+  classId?: number | null;
+  gradeSubjectId?: number | null; 
   type: 'worksheet' | 'notes' | 'textbook' | 'resource';
-
-  // Optional link to planned item
   plannedItemId?: number;
 }

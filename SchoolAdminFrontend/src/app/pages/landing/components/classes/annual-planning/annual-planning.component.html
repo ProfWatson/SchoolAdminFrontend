@@ -40,7 +40,7 @@
         (click)="goToLinkedItem(item)">
         <td class="title-cell">
       <div class="title-wrapper">
-        <span class="title-text">{{ item.title }}</span>
+        <span class="title-text">{{ item.title }} <div *ngIf="item.classId === null">(Whole grade)</div></span>
         <span class="hover-icon">👁️</span>
       </div>
     </td>

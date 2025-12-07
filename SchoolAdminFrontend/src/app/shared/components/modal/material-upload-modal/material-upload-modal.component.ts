@@ -20,6 +20,7 @@ import { SnackbarService } from '../../snackbar/snackbar.service';
 export class MaterialUploadModalComponent {
   @Input() classId!: number;
   @Input() plannedItems: PlanItem[] = [];
+  @Input() gradeSubjectId: number | null = null;
 
   @Output() close = new EventEmitter();
   @Output() uploaded = new EventEmitter();
@@ -57,14 +58,17 @@ export class MaterialUploadModalComponent {
 
     const { title, type, plannedItemId, file } = this.form.value;
 
+    if (!this.gradeSubjectId) return;
     const payload = {
       title: title ?? '',
       type: type ?? 'worksheet',
-      plannedItemId: plannedItemId ?? '',
-      file: file!
+      plannedItemId: Number(plannedItemId) ?? undefined,
+      file: file!,
+      classId: this.classId,
+      gradeSubjectId: this.gradeSubjectId
     };
     this.materialService
-      .uploadMaterial(this.classId, payload)
+      .uploadMaterial(payload)
       .subscribe(() => {
         this.snackbar.showSuccess('Uploaded successfully!');
         this.uploaded.emit()

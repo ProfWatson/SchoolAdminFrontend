@@ -168,8 +168,6 @@ export class StudentMarksModalComponent implements OnInit {
     ];
   }
 
-
-
 getPercent(total: number | undefined): number {
   if (!total || this.assignmentTotal === 0) return 0;
   return (total / this.assignmentTotal) * 100;

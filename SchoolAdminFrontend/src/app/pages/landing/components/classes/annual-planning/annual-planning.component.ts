@@ -9,6 +9,7 @@ import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.ser
 import { SubjectMaterialService } from 'src/app/shared/services/subject-material.service';
 import { Class } from 'src/app/shared/models/class.model';
 import { GradeSubject } from 'src/app/shared/models/grade-subject.model';
+import { AssignmentService } from 'src/app/shared/services/assignment.service';
 
 @Component({
   selector: 'app-annual-planning',
@@ -41,7 +42,8 @@ export class AnnualPlanningComponent implements OnChanges, OnInit {
     private classState: ClassStateService,
     private myClassesService: MyClassesService,
     private snackbar: SnackbarService,
-    private subjectMaterialService: SubjectMaterialService
+    private subjectMaterialService: SubjectMaterialService,
+    private assignmentService: AssignmentService
     ) {}
 
   ngOnInit() {
@@ -96,8 +98,6 @@ export class AnnualPlanningComponent implements OnChanges, OnInit {
       this.snackbar.showError('No related item has been created yet.');
       return;
     }
-
-    console.log(item);
     
     if (item.type === 'planned') {
       const exists = this.subjectMaterialService.exists(this.classId!, item.relatedId);
@@ -109,12 +109,13 @@ export class AnnualPlanningComponent implements OnChanges, OnInit {
       }
     } else if (item.type === 'assignment') {
       // For assignments, you might have an AssignmentService similar to SubjectMaterialService
-      // const exists = this.assignmentService.existsAssignment(this.classId!, item.relatedId);
-      // if (exists) {
-      //   this.assignmentService.focusOnAssignment(this.classId!, item.relatedId);
-      // } else {
-      //   this.snackbar.showError('Related Assignment not found yet.');
-      // }
+      const exists = this.assignmentService.existsAssignment(this.classId!, item.relatedId);
+      if (exists) {
+        this.switchTabEvent.emit('assignments');
+        this.assignmentService.focusOnAssignment(this.classId!, item.relatedId);
+      } else {
+        this.snackbar.showError('Related Assignment not found yet.');
+      }
     }
   }
 

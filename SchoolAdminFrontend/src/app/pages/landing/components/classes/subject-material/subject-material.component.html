@@ -12,6 +12,7 @@
   <app-material-upload-modal
     *ngIf="showUploadModal"
     [classId]="classId!"
+    [gradeSubjectId]="gradeSubjectId"
     [plannedItems]="plannedItems"
     (close)="closeUploadModal()"
     (uploaded)="handleUploaded()"

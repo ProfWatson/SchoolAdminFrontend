@@ -9,4 +9,5 @@ export interface Assignment {
   total: number;            
   dueDate: string;
   sections: AssignmentSection[];
+  plannedItemId?: number;
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Assignment } from 'src/app/shared/models/assignment.model';
 import { AssignmentSection } from 'src/app/shared/models/assignment-section.model';
+import { PlanItem } from 'src/app/shared/models/plan-item.model';
 
 @Component({
   selector: 'app-assignment-modal',
@@ -15,6 +16,7 @@ export class AssignmentModalComponent implements OnInit{
   @Input() assignment: Assignment | null = null;
   @Input() classId: number | null = null;
   @Input() gradeSubjectId: number | null = null;
+  @Input() plannedItems: PlanItem[] = [];
   @Output() saveItem = new EventEmitter<Assignment>();
   @Output() closeModal = new EventEmitter<void>();
 
@@ -29,7 +31,8 @@ export class AssignmentModalComponent implements OnInit{
       dueDate: [this.assignment?.dueDate ?? '', Validators.required],
       weight: [this.assignment?.weight ?? 0, Validators.required],
       total: [this.assignment?.total ?? 0],
-      sections: this.fb.array([])
+      sections: this.fb.array([]),
+      plannedItemId: [this.assignment?.plannedItemId ?? '', Validators.required],
     });
 
     if (this.assignment?.sections?.length) {
