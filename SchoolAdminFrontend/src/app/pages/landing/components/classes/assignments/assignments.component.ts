@@ -9,6 +9,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 })
 export class AssignmentsComponent implements OnChanges {
   @Input() classId!: number | null;
+  @Input() gradeSubjectId!: number | null;
   assignments: any[] = [];
 
   ngOnChanges() {

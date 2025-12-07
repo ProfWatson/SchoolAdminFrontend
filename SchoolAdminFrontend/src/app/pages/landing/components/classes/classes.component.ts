@@ -1,4 +1,7 @@
 import { Component, OnInit, signal, WritableSignal, computed } from '@angular/core';
+import { Class } from 'src/app/shared/models/class.model';
+import { GradeSubject } from 'src/app/shared/models/grade-subject.model';
+import { GradeSubjectService } from 'src/app/shared/services/grade-subject.service';
 import { MyClassesService } from 'src/app/shared/services/my-classes.service';
 
 @Component({
@@ -7,35 +10,55 @@ import { MyClassesService } from 'src/app/shared/services/my-classes.service';
   styleUrls: ['./classes.component.scss'],
 })
 export class ClassesComponent implements OnInit {
-  classes: { id: number; name: string }[] = [];
+  classes: Class[] = [];
   selectedClass = signal<number | null>(null);
+  selectedGradeSubject = signal<number | null>(null);
   activeTab: WritableSignal<string> = signal('planning');
   assignments: any[] = []; // All assignments fetched for teacher
   assignmentsForSelectedClass = computed(() => 
     this.assignments.filter(a => a.classId === this.selectedClass())
   );
+  gradeSubjects: Record<number, GradeSubject> = {};
 
-  constructor(private myClassesService: MyClassesService) {}
+  constructor(private myClassesService: MyClassesService, private gradeSubjectService: GradeSubjectService) {}
 
   ngOnInit(): void {
+    this.gradeSubjectService.getAllGradeSubjects().subscribe(gsList => {
+      this.gradeSubjects = gsList.reduce((acc, gs) => {
+        acc[gs.id] = gs;
+        return acc;
+      }, {} as Record<number, GradeSubject>);
+    });
+
     this.myClassesService.getClasses().subscribe(classes => {
       this.classes = classes;
       if (this.classes.length > 0) {
         this.selectedClass.set(this.classes[0].id);
+        this.selectedGradeSubject.set(this.classes[0].gradeSubjectId);
       }
     });
+  }
 
-    // For demo — load assignments (replace with API)
-    this.assignments = [
-      { id: 1, classId: 1, title: 'Term 1 Essay', dueDate: new Date('2025-02-01') },
-      { id: 2, classId: 2, title: 'Algebra Test', dueDate: new Date('2025-02-15') },
-    ];
+  getSubjectCode(classItem: Class): string {
+    return this.gradeSubjects[classItem.gradeSubjectId]?.subjectCode ?? '';
   }
 
   selectClass(classId: number) {
-    this.selectedClass.set(classId);
-    this.activeTab.set('planning'); // Reset inner tab when switching class
+  this.selectedClass.set(classId);
+
+  // Find the class object
+  const selected = this.classes.find(c => c.id === classId);
+  if (selected) {
+    // Get the gradeSubjectId from the selected class
+    this.selectedGradeSubject.set(selected.gradeSubjectId);
+  } else {
+    this.selectedGradeSubject.set(null);
   }
+
+  // Reset inner tab when switching class
+  this.activeTab.set('planning');
+}
+
 
   switchTab(tabName: string) {
     this.activeTab.set(tabName);

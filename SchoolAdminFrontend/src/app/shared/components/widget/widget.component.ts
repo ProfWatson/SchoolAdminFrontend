@@ -6,7 +6,7 @@ import { WidgetState } from '../../models/widget-state';
 @Component({
   selector: 'app-widget',
   standalone: true,
-  imports: [NgStyle, NgIf, CdkDrag, CdkDragHandle],
+  imports: [NgStyle, CdkDrag, CdkDragHandle],
   templateUrl: './widget.component.html',
   styleUrl: './widget.component.scss'
 })

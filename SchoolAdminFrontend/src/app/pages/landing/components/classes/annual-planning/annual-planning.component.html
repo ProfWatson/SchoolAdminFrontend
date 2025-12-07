@@ -74,6 +74,8 @@
 
 <app-add-plan-item-modal
   *ngIf="showAddModal"
+  [classes]="allClasses"
+  [gradeSubjects]="gradeSubjects"
   (saveItem)="handleItemSaved($event)"
   (closeModal)="handleCloseModal()">
 </app-add-plan-item-modal>

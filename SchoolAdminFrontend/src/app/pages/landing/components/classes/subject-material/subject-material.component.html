@@ -47,7 +47,8 @@
 
     <div class="material-item"
          *ngFor="let file of grouped.general"
-         (click)="download(file)">
+         (click)="download(file)"
+         [id]="'material-' + file.plannedItemId">
       <div class="title-cell">
         <span class="title-text">{{ file.title }}</span>
         <span

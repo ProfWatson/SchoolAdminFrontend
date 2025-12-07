@@ -5,4 +5,6 @@ export interface PlanItem {
   end: string;
   type: 'planned' | 'assignment';
   relatedId: number;
+  classId?: number | null;
+  gradeSubjectId?: number | null;
 }

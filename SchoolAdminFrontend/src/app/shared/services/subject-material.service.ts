@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { SubjectMaterialFile } from '../models/subject-material-file';
 
 /**
@@ -9,6 +9,9 @@ import { SubjectMaterialFile } from '../models/subject-material-file';
  */
 @Injectable({ providedIn: 'root' })
 export class SubjectMaterialService {
+  private _focusSubject = new BehaviorSubject<{ classId: number; id: number; type: string } | null>(null);
+  focus$ = this._focusSubject.asObservable();
+
   // In-memory store: classId -> files[]
   private store: Record<number, SubjectMaterialFile[]> = {
     // Example seed data for class 1 and 2
@@ -51,16 +54,10 @@ export class SubjectMaterialService {
 
   constructor() {}
 
-  /** Get all materials for a class */
   getMaterialsForClass(classId: number): Observable<SubjectMaterialFile[]> {
     return of(this.store[classId] ? [...this.store[classId]] : []);
   }
 
-  /**
-   * Upload a material (mock)
-   * model: { title, type, relatedId, file } where file is a File object (optional for mock)
-   * Returns the created SubjectMaterialFile
-   */
   uploadMaterial(
     classId: number,
     model: { title: string; type: SubjectMaterialFile['type']; plannedItemId?: number | ''; file?: File | null }
@@ -100,5 +97,13 @@ export class SubjectMaterialService {
       if (found) return of(found);
     }
     return of(undefined);
+  }
+
+  exists(classId: number, relatedId: number) {
+    return this.store[classId]?.some((m) => m.plannedItemId === relatedId);
+  }
+
+  focusOnItem(classId: number, relatedId: number) {
+    this._focusSubject.next({ classId, id: relatedId, type: 'material' });
   }
 }

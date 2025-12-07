@@ -1,71 +1,61 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlanItem } from 'src/app/shared/models/plan-item.model';
+import { Class } from 'src/app/shared/models/class.model';
+import { GradeSubject } from 'src/app/shared/models/grade-subject.model';
 
 @Component({
   selector: 'app-add-plan-item-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  template: `
-    <div class="modal-backdrop" (click)="close()"></div>
-
-    <div class="modal-content">
-      <h3>Add Plan Item</h3>
-
-      <form (ngSubmit)="save()" #form="ngForm">
-        <label>
-          Title:
-          <input type="text" [(ngModel)]="newItem.title" name="title" required />
-        </label>
-
-        <label>
-          Type:
-          <select [(ngModel)]="newItem.type" name="type" required>
-            <option value="planned">Planned Work</option>
-            <option value="assignment">Assignment</option>
-          </select>
-        </label>
-
-        <label>
-          Start Date:
-          <input type="date" [(ngModel)]="newItem.start" name="start" required />
-        </label>
-
-        <label>
-          End Date:
-          <input type="date" [(ngModel)]="newItem.end" name="end" required />
-        </label>
-
-        <div class="actions">
-          <button type="button" class="cancel" (click)="close()">Cancel</button>
-          <button type="submit" [disabled]="!form.valid">Save</button>
-        </div>
-      </form>
-    </div>
-  `,
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './add-plan-item-modal.component.html',
   styleUrls: ['./add-plan-item-modal.component.scss']
 })
-export class AddPlanItemModalComponent {
+export class AddPlanItemModalComponent implements OnInit {
+  @Input() classes: Class[] = [];
+  @Input() currentClassId!: number;
+  @Input() gradeSubjects: Record<number, GradeSubject> = {};
+
   @Output() saveItem = new EventEmitter<PlanItem>();
   @Output() closeModal = new EventEmitter<void>();
 
-  newItem: Partial<PlanItem> = {
-    title: '',
-    type: 'planned',
-    start: '',
-    end: '',
-  };
+  form!: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      classId: [null], // null = all classes
+      title: ['', Validators.required],
+      type: ['planned', Validators.required],
+      start: ['', Validators.required],
+      end: ['', Validators.required],
+    });
+  }
 
   save() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const currentClass = this.classes.find(c => c.id === this.currentClassId);
+    if (!currentClass) return;
+
+    const formValue = this.form.value;
+
     const item: PlanItem = {
-        id: Date.now(),
-        title: this.newItem.title!,
-        start: this.newItem.start!,
-        end: this.newItem.end!,
-        type: this.newItem.type as 'planned' | 'assignment',
-        relatedId: 0
+      id: Date.now(),
+      title: formValue.title,
+      type: formValue.type,
+      start: formValue.start,
+      end: formValue.end,
+      classId: formValue.classId, // null = all classes
+      gradeSubjectId: currentClass.gradeSubjectId,
+      relatedId: 0,
     };
+
     this.saveItem.emit(item);
     this.close();
   }

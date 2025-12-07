@@ -1,0 +1,54 @@
+<div class="modal-backdrop" (click)="close()"></div>
+
+<div class="modal-content">
+  <h3>Add Plan Item</h3>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+
+    <!-- Class Selection -->
+    <label>
+      Assign To:
+      <select formControlName="classId">
+        <option [ngValue]="null">All Classes (Grade Subject)</option>
+        <option *ngFor="let cls of classes" [ngValue]="cls.id">
+          {{ cls.name }} ({{ gradeSubjects[cls.gradeSubjectId]?.subjectCode }})
+        </option>
+      </select>
+    </label>
+
+    <!-- Title -->
+    <label>
+      Title:
+      <input type="text" formControlName="title" />
+      <div class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+        *Title is required.
+      </div>
+    </label>
+
+    <!-- Type -->
+    <label>
+      Type:
+      <select formControlName="type">
+        <option value="planned">Planned Work</option>
+        <option value="assignment">Assignment</option>
+      </select>
+    </label>
+
+    <!-- Start Date -->
+    <label>
+      Start Date:
+      <input type="date" formControlName="start" />
+    </label>
+
+    <!-- End Date -->
+    <label>
+      End Date:
+      <input type="date" formControlName="end" />
+    </label>
+
+    <div class="actions">
+      <button type="button" class="cancel" (click)="close()">Cancel</button>
+      <button type="submit" [disabled]="form.invalid">Save</button>
+    </div>
+  </form>
+</div>

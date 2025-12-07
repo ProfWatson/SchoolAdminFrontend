@@ -3,7 +3,7 @@
     *ngFor="let classItem of classes" 
     (click)="selectClass(classItem.id)"
     [class.active]="selectedClass() === classItem.id">
-    {{ classItem.name }}
+    {{ classItem.name }} ({{ getSubjectCode(classItem) }})
   </button>
 </div>
 
@@ -31,17 +31,22 @@
   <ng-container [ngSwitch]="activeTab()">
     <app-annual-planning
       *ngSwitchCase="'planning'"
-      [classId]="selectedClass()">
+      [classId]="selectedClass()"
+      [gradeSubjectId]="selectedGradeSubject()"
+      [gradeSubjects]="gradeSubjects"
+      (switchTabEvent)="switchTab($event)">
     </app-annual-planning>
 
     <app-subject-material
       *ngSwitchCase="'material'"
-      [classId]="selectedClass()">
+      [classId]="selectedClass()"
+      [gradeSubjectId]="selectedGradeSubject()">
     </app-subject-material>
 
     <app-assignments
       *ngSwitchCase="'assignments'"
-      [classId]="selectedClass()">
+      [classId]="selectedClass()"
+      [gradeSubjectId]="selectedGradeSubject()">
     </app-assignments>
   </ng-container>
 </div>

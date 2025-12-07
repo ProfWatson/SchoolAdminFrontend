@@ -63,9 +63,6 @@ export class MaterialUploadModalComponent {
       plannedItemId: plannedItemId ?? '',
       file: file!
     };
-    console.log(payload);
-    
-
     this.materialService
       .uploadMaterial(this.classId, payload)
       .subscribe(() => {

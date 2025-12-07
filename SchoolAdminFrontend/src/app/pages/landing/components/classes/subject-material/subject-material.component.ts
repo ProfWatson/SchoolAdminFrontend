@@ -1,6 +1,7 @@
 import { NgFor, NgIf, CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { MaterialUploadModalComponent } from 'src/app/shared/components/modal/material-upload-modal/material-upload-modal.component';
 import { PlanItem } from 'src/app/shared/models/plan-item.model';
 import { SubjectMaterialFile } from 'src/app/shared/models/subject-material-file';
@@ -20,8 +21,9 @@ import { SubjectMaterialService } from 'src/app/shared/services/subject-material
   templateUrl: './subject-material.component.html',
   styleUrl: './subject-material.component.scss'
 })
-export class SubjectMaterialComponent implements OnChanges{
+export class SubjectMaterialComponent implements OnInit, OnChanges{
   @Input() classId!: number | null;
+  @Input() gradeSubjectId!: number | null;
   plannedItems: PlanItem[] = [];
   files: SubjectMaterialFile[] = [];
 
@@ -31,16 +33,33 @@ export class SubjectMaterialComponent implements OnChanges{
   } = { byPlanned: [], general: [] };
 
   showUploadModal = false;
+  private focusSub!: Subscription;
 
   constructor(
     private planningService: AnnualPlanningService,
     private materialService: SubjectMaterialService
   ) {}
 
-  ngOnChanges() {
-    if (!this.classId) return;
+   ngOnInit(): void {
+    // Subscribe to focus events
+    this.focusSub = this.materialService.focus$.subscribe((event) => {
+      if (event && event.classId === this.classId) {
+        const el = document.getElementById('material-' + event.id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('highlight');
 
-    this.planningService.getPlanForClass(this.classId).subscribe((plans) => {
+          // Remove highlight after 2 seconds
+          setTimeout(() => el.classList.remove('highlight'), 2000);
+        }
+      }
+    });
+  }
+
+  ngOnChanges() {
+    if (!this.classId || !this.gradeSubjectId) return;
+
+    this.planningService.getPlanForClass(this.classId, this.gradeSubjectId).subscribe((plans) => {
       this.plannedItems = plans;
 
       this.materialService.getMaterialsForClass(this.classId!).subscribe((files) => {
@@ -48,6 +67,12 @@ export class SubjectMaterialComponent implements OnChanges{
         this.groupMaterial();
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.focusSub) {
+      this.focusSub.unsubscribe();
+    }
   }
 
   groupMaterial() {
@@ -89,13 +114,14 @@ export class SubjectMaterialComponent implements OnChanges{
     this.ngOnChanges(); // reload list
   }
 
+  //TODO FINISH
   download(item: SubjectMaterialFile) {
     window.open(item.fileUrl, '_blank');
   }
 
+  //TODO FINISH
   preview(item: SubjectMaterialFile) {
     // Optional: open PDF viewer modal
     window.open(item.fileUrl, '_blank');
   }
-
 }
