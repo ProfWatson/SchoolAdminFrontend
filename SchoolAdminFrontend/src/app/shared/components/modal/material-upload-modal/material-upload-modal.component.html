@@ -1,0 +1,54 @@
+<div class="modal-backdrop" (click)="close.emit()"></div>
+
+<div class="modal">
+  <h2>Upload Material</h2>
+
+  <form [formGroup]="form">
+
+    <!-- Title -->
+    <label>Title</label>
+    <input type="text" formControlName="title" />
+    <div class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+      Title is required.
+    </div>
+
+    <!-- Type -->
+    <label>Type</label>
+    <select formControlName="type">
+      <option value="worksheet">Worksheet</option>
+      <option value="notes">Notes</option>
+      <option value="textbook">Textbook Section</option>
+      <option value="resource">General Resource</option>
+    </select>
+
+    <!-- Planned Item Link -->
+    <label>Link to Lesson (Optional)</label>
+    <select formControlName="plannedItemId">
+      <option value="">— None —</option>
+      <option *ngFor="let p of plannedItems" [value]="p.relatedId">
+        {{ p.title }}
+      </option>
+    </select>
+
+    <!-- File Upload -->
+    <label>Select File</label>
+    <input type="file" (change)="onFileSelected($event)" multiple="false"/>
+
+    <div class="error" *ngIf="form.get('file')?.errors?.['required'] && form.get('file')?.touched">
+      A file is required.
+    </div>
+
+    <div class="error" *ngIf="form.get('file')?.errors?.['multiple']">
+      Only one file may be uploaded.
+    </div>
+
+    <!-- Buttons -->
+    <div class="actions">
+      <button type="button" class="cancel" (click)="close.emit()">Cancel</button>
+      <button type="button" class="upload" (click)="upload()" [disabled]="form.invalid">
+        Upload
+      </button>
+    </div>
+
+  </form>
+</div>

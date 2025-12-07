@@ -1,0 +1,66 @@
+<div class="subject-material-container">
+
+  <div class="header">
+    <h2>Subject Material</h2>
+
+    <button class="upload-btn" (click)="openUploadModal()">
+      ➕ Upload Material
+    </button>
+  </div>
+
+  <!-- Upload Modal -->
+  <app-material-upload-modal
+    *ngIf="showUploadModal"
+    [classId]="classId!"
+    [plannedItems]="plannedItems"
+    (close)="closeUploadModal()"
+    (uploaded)="handleUploaded()"
+  ></app-material-upload-modal>
+
+  <!-- Grouped by Planned Items -->
+  <div class="group" *ngFor="let group of grouped.byPlanned">
+    <h3 class="group-title">{{ group.title }}</h3>
+
+    <div
+      class="material-item"
+      *ngFor="let file of group.materials"
+      (click)="download(file)"
+    >
+      <div class="title-cell">
+        <span class="title-text">{{ file.title }}</span>
+        <span
+          class="eye-icon"
+          (click)="preview(file); $event.stopPropagation()"
+          >👁</span>
+      </div>
+
+      <div class="meta">
+        {{ file.type | titlecase }} • Uploaded:
+        {{ file.uploadedAt | date:'MMM d' }}
+      </div>
+    </div>
+  </div>
+
+  <!-- General Resources -->
+  <div class="group" *ngIf="grouped.general.length > 0">
+    <h3 class="group-title">General Resources</h3>
+
+    <div class="material-item"
+         *ngFor="let file of grouped.general"
+         (click)="download(file)">
+      <div class="title-cell">
+        <span class="title-text">{{ file.title }}</span>
+        <span
+          class="eye-icon"
+          (click)="preview(file); $event.stopPropagation()"
+          >👁</span>
+      </div>
+
+      <div class="meta">
+        {{ file.type | titlecase }} • Uploaded:
+        {{ file.uploadedAt | date:'MMM d' }}
+      </div>
+    </div>
+  </div>
+
+</div>

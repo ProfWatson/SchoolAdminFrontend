@@ -1,0 +1,79 @@
+<div class="annual-planning-header">
+    <div class="header-actions">
+        <div class="left-actions">
+          <button class="create-btn" (click)="openCreateModal()">➕ Add Plan Item</button>
+        </div>
+        <div class="right-actions">
+          <button (click)="toggleViewMode()">
+            {{ viewMode === 'list' ? '📊 Flowchart View' : '📋 List View' }}
+          </button>
+        </div>
+    </div>
+
+  <div class="filters">
+    <label>
+      <input type="checkbox" [(ngModel)]="filters.planned" (change)="applyFilters()" />
+      Planned Work
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="filters.assignment" (change)="applyFilters()" />
+      Assignments
+    </label>
+  </div>
+</div>
+
+<!-- List View -->
+<div *ngIf="viewMode === 'list'" class="list-view">
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Duration (days)</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filteredItems" 
+      [ngClass]="item.type"
+        (click)="goToLinkedItem(item)">
+        <td class="title-cell">
+      <div class="title-wrapper">
+        <span class="title-text">{{ item.title }}</span>
+        <span class="hover-icon">👁️</span>
+      </div>
+    </td>
+        <td [class.past]="isPast(item)">{{ item.start | date }}</td>
+        <td [class.past]="isPast(item)">{{ item.end | date }}</td>
+        <td [class.past]="isPast(item)">{{ getDuration(item.start, item.end) }}</td>
+        <td>{{ item.type }}</td>
+        <td class="actions">
+            <button class="delete-btn" (click)="deleteItem(item, $event)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Flowchart View (Prototype Gantt Style) -->
+<div *ngIf="viewMode === 'flow'" class="flow-view">
+  <div 
+    *ngFor="let item of filteredItems" 
+    [ngClass]="[item.type, isPast(item) ? 'past' : '']"
+    class="flow-item"
+    (click)="goToLinkedItem(item)">
+    <div class="bar" [style.width.%]="getDuration(item.start, item.end) * 3">
+      {{ item.title }} <span class="icon" *ngIf="!isPast(item)">👁️</span>
+    </div>
+    <div class="dates">
+      {{ item.start | date:'MMM d' }} → {{ item.end | date:'MMM d' }}
+    </div>
+  </div>
+</div>
+
+<app-add-plan-item-modal
+  *ngIf="showAddModal"
+  (saveItem)="handleItemSaved($event)"
+  (closeModal)="handleCloseModal()">
+</app-add-plan-item-modal>
